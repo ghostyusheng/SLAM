@@ -1,0 +1,6 @@
+<launch>
+  
+  <node pkg="yorkrobot" type="yorkrobot_connect_bluetooth.py" name="yorkrobot_connect_bluetooth" output="screen" >
+  </node>
+ 
+</launch>

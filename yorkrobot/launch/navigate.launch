@@ -1,0 +1,10 @@
+<launch>
+  <include file="$(find yorkrobot)/launch/lidar/$(env CLBLIDAR).launch" />
+
+  <arg name="map_file" default="$(find yorkrobot)/maps/house.yaml"/>
+  <node pkg="map_server" name="map_server"  type="map_server" args="$(arg map_file)" />
+
+  <include file="$(find yorkrobot)/launch/amcl.launch" />
+  <include file="$(find yorkrobot)/param/navigation/move_base.xml" />
+  <node name="multi_mark" pkg="yorkrobot" type="show_mark.py" output="screen" />
+</launch>

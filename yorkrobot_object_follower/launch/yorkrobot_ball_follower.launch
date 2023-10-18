@@ -1,0 +1,18 @@
+<launch>
+  <arg name="astra"      doc="Set astra(astra or usb camera) is true , set d435 is false"/>
+  <arg     if="$(env USB_CAMERA)" name="input_image"        default="/camera/rgb/image_raw"/>
+  <arg unless="$(env USB_CAMERA)" name="input_image"      default="/camera/color/image_raw"/>
+  
+  <group if="$(arg astra)">
+     <include file="$(find yorkrobot)/launch/camera.launch" />
+  </group>
+
+  <group unless="$(arg astra)">
+     <include file="$(find realsense2_camera)/launch/rs_rgbd.launch" />
+  </group>
+
+  <include file="$(find yorkrobot_object_detect)/launch/yorkrobot_ball_object.launch" />
+  <node name="yorkrobot_ball_follower" pkg="yorkrobot_object_follower" type="yorkrobot_ball_follower.py" output="screen" >
+      <param name="camera_topic" value="$(arg input_image)" type="string" />
+  </node>
+</launch>

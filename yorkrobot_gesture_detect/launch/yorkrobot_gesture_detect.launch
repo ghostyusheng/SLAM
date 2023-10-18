@@ -1,0 +1,4 @@
+<launch>
+   <include if="$(env USB_CAMERA)"  file="$(find yorkrobot_gesture_detect)/launch/yorkrobot_gesture_astra_detect.launch" />
+   <include unless="$(env USB_CAMERA)"  file="$(find yorkrobot_gesture_detect)/launch/yorkrobot_d435gesture_detect.launch" />
+</launch>
